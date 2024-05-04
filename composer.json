@@ -1,0 +1,20 @@
+{
+    "name": "cvar1984/wpscan",
+    "description": "Wordpress version scanner",
+    "require": {
+        "ext-curl": "*",
+        "symfony/console": "^7.0"
+    },
+    "license": "GPL-3.0-or-later",
+    "autoload": {
+        "psr-4": {
+            "Cvar1984\\Wpscan\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Cvar1984",
+            "email": "cvar1984@cvar1984.my.id"
+        }
+    ]
+}
