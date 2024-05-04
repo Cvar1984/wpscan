@@ -12,6 +12,7 @@ use Symfony\Component\Console\Command\Command;
 $app = new Application();
 $app->register('scan-theme')
     ->addArgument('url', InputArgument::REQUIRED, 'Path to url list')
+    ->addArgument('timeout', InputArgument::OPTIONAL, 'Default timeout  3s', 3)
     ->setCode(function (InputInterface $input, OutputInterface $output): int {
         $themeList = file('themes.txt', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
         $urls = file($input->getArgument('url'), FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
@@ -26,6 +27,8 @@ $app->register('scan-theme')
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
                 curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
                 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+                curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 0);
+                curl_setopt($ch, CURLOPT_TIMEOUT, $input->getArgument('timeout'));
                 $result = curl_exec($ch);
                 preg_match('/Version:\s(.*)/m', $result, $matches);
 
@@ -43,6 +46,7 @@ $app->register('scan-theme')
 
 $app->register('scan-plugin')
     ->addArgument('url', InputArgument::REQUIRED, 'Path to url list')
+    ->addArgument('timeout', InputArgument::OPTIONAL, 'Default timeout  3s', 3)
     ->setCode(function (InputInterface $input, OutputInterface $output): int {
         $pluginList = file('plugins.txt', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
         $urls = file($input->getArgument('url'), FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
@@ -57,6 +61,8 @@ $app->register('scan-plugin')
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
                 curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
                 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+                curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 0);
+                curl_setopt($ch, CURLOPT_TIMEOUT, $input->getArgument('timeout'));
                 $result = curl_exec($ch);
                 preg_match('/Stable\stag:\s(.*)/m', $result, $matches);
 
