@@ -22,8 +22,9 @@ $app->register('scan-theme')
             $output->writeln(sprintf('%sTesting URL: %s', PHP_EOL, $url));
 
             foreach ($themeList as $themeName) {
-                $url = "$url/wp-content/themes/$themeName/style.css";
-                curl_setopt($ch, CURLOPT_URL, $url);
+                $entryPoint = "$url/wp-content/themes/$themeName/style.css";
+                curl_setopt($ch, CURLOPT_URL, $entryPoint);
+		//curl_setopt($ch, CURLOPT_VERBOSE, true);
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
                 curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
                 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
@@ -56,8 +57,8 @@ $app->register('scan-plugin')
             $output->writeln(sprintf('%sTesting URL: %s', PHP_EOL, $url));
 
             foreach ($pluginList as $pluginName) {
-                $url = "$url/wp-content/themes/$pluginName/style.css";
-                curl_setopt($ch, CURLOPT_URL, $url);
+                $entryPoint = "$url/wp-content/plugins/$pluginName/readme.txt";
+                curl_setopt($ch, CURLOPT_URL, $entryPoint);
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
                 curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
                 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
