@@ -1,3 +1,4 @@
 newsletter
 woocommerce-payments
 wpcargo
+wp-automatic
